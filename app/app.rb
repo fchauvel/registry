@@ -22,5 +22,6 @@ sensors = [
 db = InMemoryDataStore.new(sensors)
 
 Registry.set :db, db
+Registry.set :bind, '0.0.0.0'
 
 run Registry.run!
