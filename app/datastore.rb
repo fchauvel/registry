@@ -134,8 +134,8 @@ class MySQLDataStore < DataStore
   end
 
   def insert(sensor)
-    query = "INSERT into sensors VALUES ('#{sensor.id}', '#{sensor.name}'" +
-            "#{sensor.description}', '#{sensor.unit}');"
+    query = "INSERT into sensors VALUES ('#{sensor.id}', '#{sensor.name}'," +
+            "'#{sensor.description}', '#{sensor.unit}');"
     result = @db.query(query)
   end
 

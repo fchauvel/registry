@@ -3,6 +3,11 @@
 Manage the sensors' metadata
 
 
+# Installation
+
+The Registry 
+
+
 # Testing
 
 Registry is Sinatra application. You can run the unit tests with the command
@@ -23,6 +28,14 @@ You can start the registry service as follows:
 	== Sinatra (v2.0.3) has taken the stage on 4567 for development with backup from WEBrick
 	[2018-08-16 05:33:34] INFO  WEBrick::HTTPServer#start: pid=26706 port=4567
 	...
+	
+You can quickly test whether the server is running by requesting the about page follows:
+
+	$> curl http://localhost:4567/sensapp/registry/about/
+	
+Alternatively, you may also post a JSON snippet using the following command:
+
+	$> curl -vX POST localhost:4567/sensapp/sensors/ -d @snippet.json --header "Content-type: application/json"
 	
 
 
