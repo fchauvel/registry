@@ -19,7 +19,7 @@ sensors = [
   Sensor.new("s2", "pressure", "pressure temperature", "Pa")
 ]
 
-db = InMemoryDataStore.new(sensors)
+db = MySQLDataStore.new()
 
 Registry.set :db, db
 Registry.set :bind, '0.0.0.0'
