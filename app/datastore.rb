@@ -109,12 +109,12 @@ end
 
 class MySQLDataStore < DataStore
 
-  def initialize()
-    @db = Mysql2::Client.new(:host => '127.0.0.1',
-                             :port => 3306,
-                             :username =>'root',
-                             :password => '123456',
-                             :database => 'sensapp_registry')
+  def initialize(settings)
+    @db = Mysql2::Client.new(:host => settings.db_host,
+                             :port => settings.db_port,
+                             :username => settings.db_user,
+                             :password => settings.db_password,
+                             :database => settings.db_name)
   end
 
   def find_by_id(id)
