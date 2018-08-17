@@ -113,8 +113,12 @@ class MySQLDataStore < DataStore
     @db = Mysql2::Client.new(:host => settings.db_host,
                              :port => settings.db_port,
                              :username => settings.db_user,
-                             :password => settings.db_password,
-                             :database => settings.db_name)
+                             :password => settings.db_password)
+    @db.query("CREATE DATABASE IF NOT EXISTS #{settings.db_name};")
+    @db.select_db(settings.db_name)
+    @db.query('CREATE TABLE IF NOT EXISTS sensors (id VARCHAR(50),' +
+              'name VARCHAR(50), description VARCHAR(200), ' +
+              'unit VARCHAR(5), PRIMARY KEY(id));')
   end
 
   def find_by_id(id)
