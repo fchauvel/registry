@@ -16,8 +16,9 @@ require 'mysql2'
 
 class Sensor
 
-  attr_reader :id, :name, :description, :unit
-
+  attr_reader :name, :description, :unit
+  attr_accessor :id
+  
   def initialize(id, name, description, unit)
     @id = id
     @name = name
@@ -69,6 +70,7 @@ class InMemoryDataStore < DataStore
 
 
   def initialize(sensors)
+    @last_id = 0
     @sensors = {}
     sensors.each{ |s| @sensors[s.id] = s }
   end
@@ -95,6 +97,8 @@ class InMemoryDataStore < DataStore
     then
       raise "Duplicated sensor ID '#{sensor.id}'"
     end
+    @last_id += 1
+    sensor.id = @last_id
     @sensors[sensor.id] = sensor
   end
 
@@ -116,7 +120,7 @@ class MySQLDataStore < DataStore
                              :password => settings.db_password)
     @db.query("CREATE DATABASE IF NOT EXISTS #{settings.db_name};")
     @db.select_db(settings.db_name)
-    @db.query('CREATE TABLE IF NOT EXISTS sensors (id VARCHAR(50),' +
+    @db.query('CREATE TABLE IF NOT EXISTS sensors (id MEDIUMINT NOT NULL AUTO INCREMENT,' +
               'name VARCHAR(50), description VARCHAR(200), ' +
               'unit VARCHAR(5), PRIMARY KEY(id));')
   end
@@ -130,6 +134,7 @@ class MySQLDataStore < DataStore
     raise "Invalid database, several sensors have ID '#{id}'"
   end
 
+  
   def find_all_sensors()
     sensors = []
     result = @db.query('SELECT * FROM sensors;')
@@ -138,9 +143,10 @@ class MySQLDataStore < DataStore
   end
 
   def insert(sensor)
-    query = "INSERT into sensors VALUES ('#{sensor.id}', '#{sensor.name}'," +
+    query = "INSERT into sensors VALUES ('#{sensor.name}'," +
             "'#{sensor.description}', '#{sensor.unit}');"
     result = @db.query(query)
+    sensor.id = @db.last_id
   end
 
 

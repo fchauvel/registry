@@ -23,8 +23,8 @@ describe 'Registry ' do
    
   let(:app) {
     sensors = [
-      Sensor.new("s1", "temperature", "room temperature", "C"),
-      Sensor.new("s2", "pressure", "room pressure", "Pa")
+      Sensor.new(1001, "temperature", "room temperature", "C"),
+      Sensor.new(1002, "pressure", "room pressure", "Pa")
     ]
     Registry.set :db, InMemoryDataStore.new(sensors)
     Registry.new
@@ -60,9 +60,9 @@ describe 'Registry ' do
   end
 
 
-  context 'GET /sensapp/sensors/s1' do
+  context 'GET /sensapp/sensors/1001' do
 
-    let (:response) { get 'sensapp/sensors/s1' }
+    let (:response) { get 'sensapp/sensors/1001' }
 
     it "returns the metadata of s1" do
       sensor = JSON.parse(response.body)
@@ -90,8 +90,7 @@ describe 'Registry ' do
   context 'POST my-sensor at /sensapp/sensors' do
     
     before(:each) do
-      data = { 'id': '12345',
-               'name': 'my-sensor',
+      data = { 'name': 'my-sensor',
                'description': 'some description',
                'unit': 's'
              }
@@ -101,15 +100,20 @@ describe 'Registry ' do
     
     it 'returns 200 OK' do
       expect(last_response.status).to eq 200
+      data = JSON.parse(last_response.body)
+      expect(data).to have_key("id")
     end
 
     
-    it 'make my-sensor available at /sensapp/12345' do
-      get '/sensapp/sensors/12345'
+    it 'make my-sensor available at /sensapp/new-id' do
+      data = JSON.parse(last_response.body)
+      expect(data).to have_key("id")
+
+      get "/sensapp/sensors/#{data["id"].to_s}"
       expect(last_response.status).to eq 200
  
-      data = JSON.parse(last_response.body)
-      expect(data["name"]).to eq "my-sensor"
+      data2 = JSON.parse(last_response.body)
+      expect(data2["name"]).to eq "my-sensor"
     end
     
   end

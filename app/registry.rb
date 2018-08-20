@@ -32,13 +32,14 @@ class Registry < Sinatra::Base
     payload = JSON.parse request.body.read.to_s
     sensor = Sensor.from_json(payload)
     settings.db.insert(sensor)
-    "OK"
+    content_type :json
+    sensor.to_hash.to_json
   end
 
   
   get '/sensapp/sensors/:id' do
     begin
-      sensor = settings.db.find_by_id(params[:id])
+      sensor = settings.db.find_by_id(params[:id].to_i)
       content_type :json
       return sensor.to_hash.to_json
     rescue
