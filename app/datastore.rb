@@ -120,7 +120,7 @@ class MySQLDataStore < DataStore
                              :password => settings.db_password)
     @db.query("CREATE DATABASE IF NOT EXISTS #{settings.db_name};")
     @db.select_db(settings.db_name)
-    @db.query('CREATE TABLE IF NOT EXISTS sensors (id MEDIUMINT NOT NULL AUTO INCREMENT,' +
+    @db.query('CREATE TABLE IF NOT EXISTS sensors (id MEDIUMINT NOT NULL AUTO_INCREMENT,' +
               'name VARCHAR(50), description VARCHAR(200), ' +
               'unit VARCHAR(5), PRIMARY KEY(id));')
   end
