@@ -14,7 +14,7 @@ LABEL maintainer "franck.chauvel@sintef.no"
 
 # Update the dist and install needed tools
 RUN apt-get -qq update
-RUN apt-get -qq -y install git libmysqlclient-dev
+RUN apt-get -qq -y install git default-libmysqlclient-dev
 
 # Fetch, build and install sensapp-storage
 RUN git clone https://github.com/fchauvel/registry.git
