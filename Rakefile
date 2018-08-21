@@ -8,18 +8,13 @@
 # of the MIT license.  See the LICENSE file for details.
 #
 
-source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'mysql2'
+require 'rspec/core/rake_task'
 
-group :test do
-  gem 'rake'
-  gem 'rspec'
-  gem 'rspec-mocks'
-  gem 'rspec-expectations'
-  gem 'rack-test'
+
+RSpec::Core::RakeTask.new(:spec) do |task|
+  task.rspec_opts = '--format documentation'
 end
 
 
-
+task :default => :spec
