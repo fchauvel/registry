@@ -14,10 +14,10 @@ LABEL maintainer "franck.chauvel@sintef.no"
 
 # Update the dist and install needed tools
 RUN apt-get -qq update
-RUN apt-get -qq -y install build-essential git default-libmysqlclient-dev
+RUN apt-get -qq -y install build-essential default-libmysqlclient-dev
 
 # Fetch, build and install sensapp-storage
-RUN git clone https://github.com/fchauvel/registry.git
+COPY . /registry
 WORKDIR registry
 RUN gem install bundler
 RUN bundler install --without test .
