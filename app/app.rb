@@ -12,12 +12,16 @@ require './app/settings.rb'
 require './app/datastore.rb'
 require './app/registry.rb'
 require './app/info.rb'
-
+require './app/utils.rb'
 
 settings = Settings.new
 settings.from_command_line
 
 db = MySQLDataStore.new(settings)
+with_retry(FOREVER) {
+  db.connect
+}
+
 
 Registry.set :db, db
 Registry.set :bind, '0.0.0.0'

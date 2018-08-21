@@ -46,6 +46,9 @@ end
 
 class DataStore
 
+  def connect
+  end
+  
   def find_by_id(id)
     raise 'Should be overriden!'
   end
@@ -114,16 +117,27 @@ end
 class MySQLDataStore < DataStore
 
   def initialize(settings)
-    @db = Mysql2::Client.new(:host => settings.db_host,
-                             :port => settings.db_port,
-                             :username => settings.db_user,
-                             :password => settings.db_password)
-    @db.query("CREATE DATABASE IF NOT EXISTS #{settings.db_name};")
-    @db.select_db(settings.db_name)
+    @settings = settings
+    @db = nil
+  end
+
+
+  def connect    
+    @db = Mysql2::Client.new(:host => @settings.db_host,
+                             :port => @settings.db_port,
+                             :username => @settings.db_user,
+                             :password => @settings.db_password)
+    @db.query("CREATE DATABASE IF NOT EXISTS #{@settings.db_name};")
+    @db.select_db(@settings.db_name)
     @db.query('CREATE TABLE IF NOT EXISTS sensors (id MEDIUMINT NOT NULL AUTO_INCREMENT,' +
               'name VARCHAR(50), description VARCHAR(200), ' +
               'unit VARCHAR(5), PRIMARY KEY(id));')
+  rescue Exception => error
+    puts error
+    raise
   end
+
+  
 
   def find_by_id(id)
     records = @db.query("SELECT * FROM sensors WHERE id = '#{id}';")
