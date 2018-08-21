@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/fchauvel/registry.svg?branch=master)](https://travis-ci.org/fchauvel/registry)
+
+
 # SensApp::Registry
 
 Manage the sensors' metadata
