@@ -80,8 +80,8 @@ describe 'Registry ' do
       get '/sensapp/sensors/unknown-sensor'
     }
       
-    it 'retunrs  404 Not Found' do
-      expect(response.status).to eq 404
+    it 'returns 204 Not Content' do
+      expect(response.status).to eq 204
     end
     
   end
