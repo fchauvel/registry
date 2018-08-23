@@ -43,7 +43,7 @@ class Registry < Sinatra::Base
       content_type :json
       return sensor.to_hash.to_json
     rescue
-      status 404
+      status 204
     end
   end
 
