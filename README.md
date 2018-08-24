@@ -3,12 +3,23 @@
 
 # SensApp::Registry
 
-Manage the sensors' metadata
+The Registry offers the following end-points to manipulate the metadata of sensors
 
-
-# Installation
-
-The Registry 
+|--------|---------------------------|------------------------------------|---------------------------------------------------|
+| METHOD | End-point                 | Payload Example                    | Description                                       |
+|--------|---------------------------|------------------------------------|---------------------------------------------------|
+| GET    | `/sensapp/registry/about` | None                               | Returns license and version as health status      |
+|--------|---------------------------|------------------------------------|---------------------------------------------------|
+| GET    | `/sensapp/sensors/`       | None                               | Returns the meta-data of all sensors              |
+|--------|---------------------------|------------------------------------|---------------------------------------------------|
+| POST   | `/sensapp/sensors/`       | `{ 'name': 'my-sensor',            |                                                   |
+|        |                           | 'description': 'some description', |                                                   |
+|        |                           | 'unit': 's'                        |                                                   |
+|        |                           | } `                                | Insert these data as a new sensor.                |
+|        |                           |                                    |                                                   |
+|--------|---------------------------|------------------------------------|---------------------------------------------------|
+| GET    | `/sensapp/sensors/:id`    | None                               | Returns the metadata of sensor whose ID match id` |
+|--------|---------------------------|------------------------------------|---------------------------------------------------|
 
 
 # Testing
