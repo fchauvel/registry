@@ -1,3 +1,4 @@
+
 [![Build Status](https://travis-ci.org/fchauvel/registry.svg?branch=master)](https://travis-ci.org/fchauvel/registry)
 
 
@@ -5,21 +6,25 @@
 
 The Registry offers the following end-points to manipulate the metadata of sensors
 
-|--------|---------------------------|------------------------------------|---------------------------------------------------|
-| METHOD | End-point                 | Payload Example                    | Description                                       |
-|--------|---------------------------|------------------------------------|---------------------------------------------------|
-| GET    | `/sensapp/registry/about` | None                               | Returns license and version as health status      |
-|--------|---------------------------|------------------------------------|---------------------------------------------------|
-| GET    | `/sensapp/sensors/`       | None                               | Returns the meta-data of all sensors              |
-|--------|---------------------------|------------------------------------|---------------------------------------------------|
-| POST   | `/sensapp/sensors/`       | `{ 'name': 'my-sensor',            |                                                   |
-|        |                           | 'description': 'some description', |                                                   |
-|        |                           | 'unit': 's'                        |                                                   |
-|        |                           | } `                                | Insert these data as a new sensor.                |
-|        |                           |                                    |                                                   |
-|--------|---------------------------|------------------------------------|---------------------------------------------------|
-| GET    | `/sensapp/sensors/:id`    | None                               | Returns the metadata of sensor whose ID match id` |
-|--------|---------------------------|------------------------------------|---------------------------------------------------|
+ 1. `GET /sensapp/registry/about` Returns some information about
+    version and license. Useful as a health check.
+ 
+ 1. `GET /sensapp/sensors/` Returns the metadata of all sensors
+    registered so far as a JSON document.
+
+ 1. `POST /sensapp/sensors/` Register a new sensor. The response
+    contains the identifier the registry assigned to this new sensor. The
+    payload of the POST request looks as follows:
+	
+		{ 
+			'name': 'my-sensor',
+			'description': 'A sweet little sensor',
+			'unit': 's' 
+		}
+		
+  1. `GET /sensapp/sensors/:id` returns the metadata of the sensor
+     with identifier `:id`. If there is no such sensor, the response
+     will be a 204 (No Content).
 
 
 # Testing
