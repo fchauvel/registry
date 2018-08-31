@@ -6,13 +6,13 @@
 
 The Registry offers the following end-points to manipulate the metadata of sensors
 
- 1. `GET /sensapp/registry/about` Returns some information about
+ 1. `GET /registry/about` Returns some information about
     version and license. Useful as a health check.
  
- 1. `GET /sensapp/sensors/` Returns the metadata of all sensors
+ 1. `GET /sensors/` Returns the metadata of all sensors
     registered so far as a JSON document.
 
- 1. `POST /sensapp/sensors/` Register a new sensor. The response
+ 1. `POST /sensors/` Register a new sensor. The response
     contains the identifier the registry assigned to this new sensor. The
     payload of the POST request looks as follows:
 	
@@ -22,7 +22,7 @@ The Registry offers the following end-points to manipulate the metadata of senso
 			'unit': 's' 
 		}
 		
-  1. `GET /sensapp/sensors/:id` returns the metadata of the sensor
+  1. `GET /sensors/:id` returns the metadata of the sensor
      with identifier `:id`. If there is no such sensor, the response
      will be a 204 (No Content).
 

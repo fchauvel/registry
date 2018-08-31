@@ -31,9 +31,9 @@ describe 'Registry ' do
   }
 
   
-  context 'GET /sensapp/registry/about' do
+  context 'GET /registry/about' do
 
-    let(:response) { get 'sensapp/registry/about' }
+    let(:response) { get 'registry/about' }
     
     it 'returns 200 OK' do
       expect(response.status).to eq(200)
@@ -42,9 +42,9 @@ describe 'Registry ' do
   end
 
 
-  context 'GET /sensapp/sensors/' do
+  context 'GET /sensors/' do
 
-    let (:response) { get 'sensapp/sensors/' }
+    let (:response) { get 'sensors/' }
 
     it 'returns all available sensors' do
       expect(response.status).to eq(200)
@@ -60,9 +60,9 @@ describe 'Registry ' do
   end
 
 
-  context 'GET /sensapp/sensors/1001' do
+  context 'GET /sensors/1001' do
 
-    let (:response) { get 'sensapp/sensors/1001' }
+    let (:response) { get '/sensors/1001' }
 
     it "returns the metadata of s1" do
       sensor = JSON.parse(response.body)
@@ -74,10 +74,10 @@ describe 'Registry ' do
   end
 
   
-  context 'GET /sensapp/sensors/unknown-sensor' do
+  context 'GET /sensors/unknown-sensor' do
 
     let (:response) {
-      get '/sensapp/sensors/unknown-sensor'
+      get '/sensors/unknown-sensor'
     }
       
     it 'returns 204 Not Content' do
@@ -87,14 +87,14 @@ describe 'Registry ' do
   end
   
 
-  context 'POST my-sensor at /sensapp/sensors' do
+  context 'POST my-sensor at /sensors' do
     
     before(:each) do
       data = { 'name': 'my-sensor',
                'description': 'some description',
                'unit': 's'
              }
-      post '/sensapp/sensors/', JSON.generate(data)
+      post '/sensors/', JSON.generate(data)
     end
 
     
@@ -109,7 +109,7 @@ describe 'Registry ' do
       data = JSON.parse(last_response.body)
       expect(data).to have_key("id")
 
-      get "/sensapp/sensors/#{data["id"].to_s}"
+      get "/sensors/#{data["id"].to_s}"
       expect(last_response.status).to eq 200
  
       data2 = JSON.parse(last_response.body)
