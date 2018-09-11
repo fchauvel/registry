@@ -1,6 +1,6 @@
 
 [![Build Status](https://travis-ci.org/fchauvel/registry.svg?branch=master)](https://travis-ci.org/fchauvel/registry)
-
+[![Test Coverage](https://img.shields.io/codecov/c/github/fchauvel/registry.svg)](https://codecov.io/gh/fchauvel/registry)
 
 # SensApp::Registry
 
