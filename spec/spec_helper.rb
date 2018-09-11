@@ -8,20 +8,9 @@
 # of the MIT license.  See the LICENSE file for details.
 #
 
-source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'mysql2'
+require 'simplecov'
+SimpleCov.start
 
-group :test do
-  gem 'rake'
-  gem 'rspec'
-  gem 'rspec-mocks'
-  gem 'rspec-expectations'
-  gem 'rack-test'
-  gem 'codecov'
-  gem 'simplecov'
-end
-
-
-
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
