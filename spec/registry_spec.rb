@@ -10,6 +10,8 @@
 
 
 
+require "spec_helper.rb"
+
 require "rack/test"
 
 require "./app/registry.rb"

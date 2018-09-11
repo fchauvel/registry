@@ -10,6 +10,8 @@
 
 
 
+require "spec_helper.rb"
+
 require "./app/datastore.rb"
 
 

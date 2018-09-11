@@ -8,8 +8,14 @@
 # of the MIT license.  See the LICENSE file for details.
 #
 
-require 'rspec'
+
+
+require "spec_helper.rb"
+
+require "rspec"
+
 require "./app/utils.rb"
+
 
 
 describe "with_retry" do
