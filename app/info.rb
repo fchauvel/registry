@@ -11,7 +11,7 @@
 
 module About
   PROGRAM = 'SensApp::Registry'
-  VERSION = '0.0.0'
+  VERSION = '0.1.0'
   COPYRIGHT = 'Copyright (C) SINTEF 2018'
   LICENSE = 'MIT'
 end
