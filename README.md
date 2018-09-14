@@ -2,6 +2,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/383771e3e7cb44de92ca28cf71bc935d)](https://app.codacy.com/app/fchauvel/registry?utm_source=github.com&utm_medium=referral&utm_content=fchauvel/registry&utm_campaign=Badge_Grade_Settings)
 [![Build Status](https://travis-ci.org/fchauvel/registry.svg?branch=master)](https://travis-ci.org/fchauvel/registry)
 [![Test Coverage](https://img.shields.io/codecov/c/github/fchauvel/registry.svg)](https://codecov.io/gh/fchauvel/registry)
+![GitHub tag](https://img.shields.io/github/tag/fchauvel/registry.svg)
 
 # SensApp::Registry
 
