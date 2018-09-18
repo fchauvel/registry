@@ -8,20 +8,19 @@
 # of the MIT license.  See the LICENSE file for details.
 #
 
-FROM ruby:2.5.1-slim-stretch
+FROM ruby:2.5.1-alpine3.7
 
 LABEL maintainer "franck.chauvel@sintef.no"
 
-# Update the dist and install needed tools
-RUN apt-get -qq update
-RUN apt-get -qq -y install build-essential ruby-mysql2 default-libmysqlclient-dev
-
-# Fetch, build and install sensapp-storage
+WORKDIR /registry
 COPY . /registry
-WORKDIR registry
-RUN gem install bundler
-RUN bundler install --without test .
 
+# Install the tools and
+RUN apk add --no-cache build-base mariadb-dev \ 
+    && gem install bundler \
+    && bundler install --without test . \
+    && apk del build-base
+    	
 # Run sensapp-storage
 CMD ["ruby", "app/app.rb"]
 
